@@ -1,10 +1,10 @@
 Langkah,Aksi,Alasan,Baris sebelum,Baris sesudah,Terdampak
 C1,Ganti nama 116 kolom ke kode pendek,Header asli terlalu panjang; teks asli disimpan di kolom_map,194,194,
-C2,Hapus baris yang seluruh jawaban surveinya kosong,"Respons kosong, tidak ada data untuk dianalisis",194,192,"ID [11, 133]"
-C3,Validasi 88 item Likert & ubah tipe ke Int64,Memastikan semua nilai bulat 1-5 (0 pelanggaran),192,192,
-C4,Validasi opsi VARK terhadap daftar resmi & rapikan format,0 opsi asing; buang ';' di akhir dan spasi berlebih,192,192,
-C5,IPS_2026_S1: nilai 0 -> NaN (173 sel),Semester berjalan; 0 berarti nilai belum tersedia,192,192,173 sel
-C6,IPK = 0 tanpa IPS sebelumnya -> NaN,Belum ada IPK; disamakan dengan kasus serupa yang sudah kosong,192,192,"ID [20, 29, 59, 82]"
-C7,Cek rentang 0-4 & konsistensi IPK vs rata-rata IPS,Semua valid; nilai rendah dipertahankan sebagai ekstrem yang mungkin,192,192,"IPS<2: ID [4, 7, 30, 112, 128, 134, 175]"
-C8,"Cek duplikat (persis, survei identik, sangat mirip)","0 duplikat persis, 0 survei identik; pasangan mirip punya IPS/IPK berbeda -> orang berbeda",192,192,
-C9,Tambah flag kualitas jawaban (tidak menghapus),Straightlining = jawaban identik pada pernyataan berlawanan; dipertahankan dengan flag,192,192,flag_straightline: 15 | flag_near_straight: 8
+C2,Hapus baris yang seluruh jawaban surveinya kosong,"Respons kosong total (survei, IPS, dan IPK kosong); tidak ada data untuk dianalisis",194,192,"ID [11, 133]"
+C3,Validasi 88 item Likert & ubah tipe float64 -> Int64,"0 nilai di luar 1-5; konversi format saja, nilai jawaban tidak berubah",192,192,
+C4,Validasi opsi VARK terhadap daftar resmi & rapikan format,0 opsi asing; buang ';' di akhir dan spasi berlebih (isi jawaban tidak berubah),192,192,
+C5,IPS_2026_S1: nilai 0 -> NaN (173 sel),"Semester 2026 S1 masih berjalan; angka 0 berarti nilai belum tersedia, bukan IPS nol",192,192,173 sel
+C6,IPK = 0 pada responden tanpa IPS -> NaN,Belum punya IPS berarti belum punya IPK; disamakan dengan kasus serupa yang sudah kosong,192,192,"ID [20, 29, 59, 82]"
+C7,Validasi rentang IPS/IPK (0-4) & konsistensi IPK vs rata-rata IPS,"0 nilai di luar rentang; selisih IPK-rata IPS maks 0.21; IPS rendah = nilai valid yang ekstrem, dipertahankan",192,192,"IPS<2: ID [4, 7, 30, 112, 128, 134, 175]"
+C8,"Cek duplikat (ID, persis, survei identik, sangat mirip)","0 ID ganda, 0 duplikat persis, 0 survei identik; pasangan mirip punya IPS/IPK berbeda -> orang berbeda, tidak ada yang dihapus",192,192,
+C9,Tambah kolom flag kualitas jawaban (tidak menghapus),Straightlining = jawaban identik pada pernyataan yang saling berlawanan; dipertahankan dengan flag,192,192,flag_straightline: 15 | flag_near_straight: 8

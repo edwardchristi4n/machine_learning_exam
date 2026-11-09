@@ -4,6 +4,7 @@ C2,Hapus baris yang seluruh jawaban surveinya kosong,"Respons kosong total (surv
 C3,Validasi 88 item Likert & ubah tipe float64 -> Int64,"0 nilai di luar 1-5; konversi format saja, nilai jawaban tidak berubah",192,192,
 C4,Validasi opsi VARK terhadap daftar resmi & rapikan format,0 opsi asing; buang ';' di akhir dan spasi berlebih (isi jawaban tidak berubah),192,192,
 C5,IPS_2026_S1: nilai 0 -> NaN (173 sel),"Semester 2026 S1 masih berjalan; angka 0 berarti nilai belum tersedia, bukan IPS nol",192,192,173 sel
+C5,Hapus kolom IPS_2026_S1,"Kosong seluruhnya setelah 0 -> NaN, tidak informatif; tetap ada di data asli dataset/raw/",192,192,kolom 116 -> 115
 C6,IPK = 0 pada responden tanpa IPS -> NaN,Belum punya IPS berarti belum punya IPK; disamakan dengan kasus serupa yang sudah kosong,192,192,"ID [20, 29, 59, 82]"
 C7,Validasi rentang IPS/IPK (0-4) & konsistensi IPK vs rata-rata IPS,"0 nilai di luar rentang; selisih IPK-rata IPS maks 0.21; IPS rendah = nilai valid yang ekstrem, dipertahankan",192,192,"IPS<2: ID [4, 7, 30, 112, 128, 134, 175]"
 C8,"Cek duplikat (ID, persis, survei identik, sangat mirip)","0 ID ganda, 0 duplikat persis, 0 survei identik; pasangan mirip punya IPS/IPK berbeda -> orang berbeda, tidak ada yang dihapus",192,192,

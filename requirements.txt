@@ -1,0 +1,9 @@
+# Versi sesuai virtual environment (.venv) kelompok
+pandas==3.1.1
+numpy==2.5.4
+openpyxl==3.1.5      # membaca dataset .xlsx dan menyimpan data dictionary .xlsx
+ipykernel==7.4.0     # menjalankan notebook di VS Code / Jupyter
+
+# Untuk Bagian 5 (EDA): grafik dan uji statistik
+matplotlib
+scipy

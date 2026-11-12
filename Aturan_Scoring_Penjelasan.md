@@ -332,6 +332,31 @@ Alasan untuk laporan: *"Responden yang memberikan jawaban identik pada seluruh 8
 | `FS_<DIM>_pole` | 3 | Sedang; SEN_INT condong ke SEN | |
 | `FS_<DIM>_strength` | 3 | **Buruk** (≈ 90% Balanced) | Tidak disarankan sebagai target |
 
+## 8b. Label versi panduan UAS (sel S5 di notebook)
+
+Panduan UAS memakai **aturan label operasional** yang lebih sederhana dari aturan teori di atas. Supaya dataset UTS langsung bisa dipakai di UAS, label versi UAS dihitung juga, **di kolom terpisah**. Label teori (bagian 3–6) tidak diubah.
+
+| Kolom | Aturan UAS | Bedanya dengan label teori |
+|---|---|---|
+| `VARK_Qxx_V/A/R/K` (64 kolom) | 1 = opsi dipilih, 0 = tidak; soal kosong tetap kosong | Format fitur X untuk VARK. Jumlahnya per modalitas = `VARK_V/A/R/K` |
+| `VARK_label_uas` | Modalitas dengan skor tertinggi yang unik; kalau seri → **Seri** | Teori memakai stepping distance (bisa multimodal) |
+| `FS_AR_label_uas` | Tanda `FS_ACT_REF_score`: + Active, − Reflective, 0 **Setara** | Hanya sumbu Active–Reflective, tanpa kekuatan |
+| `HM_label_uas` | Gaya dengan jumlah tertinggi yang unik; kalau seri → **Seri** | Teori memakai persentil (norma lokal) |
+| `KOLB_label_uas` | Tanda d1 = AC−CE dan d2 = AE−RO; salah satu 0 → **Batas** | Teori memasukkan nilai 0 ke sisi konkret/reflektif |
+
+Straightliner **tetap diberi label** karena aturan UAS bisa menghitungnya (semuanya menjadi Setara/Seri/Batas). Keputusan memakai atau mengecualikan mereka diambil saat modelling di UAS.
+
+**Hasil pada data (n = 192):**
+
+| Label UAS | Distribusi | Kategori Seri/Setara/Batas |
+|---|---|---|
+| `VARK_label_uas` | Kinesthetic 51, Aural 42, Visual 38, Read/Write 31, Seri 30 | 16% |
+| `FS_AR_label_uas` | Active 67, Reflective 64, Setara 61 | 32% |
+| `HM_label_uas` | Seri 64, Pragmatist 43, Reflector 36, Theorist 31, Activist 18 | 33% (kelas terbesar) |
+| `KOLB_label_uas` | Batas 70, CE_RO 42, CE_AE 32, AC_RO 30, AC_AE 18 | 36% (kelas terbesar) |
+
+Artinya, untuk klasifikasi UAS, VARK dan Felder lebih siap; HM dan Kolb didominasi kategori operasional (grafik E5c).
+
 ---
 
 ## 9. Paragraf siap pakai untuk laporan

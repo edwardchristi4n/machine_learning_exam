@@ -1,9 +1,9 @@
-# Versi sesuai virtual environment (.venv) kelompok
+# Versi sesuai virtual environment (.venv) kelompok, Python 3.12
 pandas==3.1.1
 numpy==2.5.4
 openpyxl==3.1.5      # membaca dataset .xlsx dan menyimpan data dictionary .xlsx
 ipykernel==7.4.0     # menjalankan notebook di VS Code / Jupyter
 
 # Untuk Bagian 5 (EDA): grafik dan uji statistik
-matplotlib
-scipy
+matplotlib>=3.9      # parameter tick_labels pada boxplot
+scipy>=1.11          # stats.false_discovery_control (koreksi FDR)

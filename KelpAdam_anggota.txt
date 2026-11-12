@@ -1,0 +1,11 @@
+     Anggota Kelompok Adam (KelpAdam):
+     - Edward Christian Imanuel Tambunan / 240712822
+     - Viriya Anatta Djasawibawa / 240712836
+     - Andreas Dwitara Sidabariba / 240712850
+
+     Pembagian tugas:
+     - Edward: kode data understanding, data cleaning, scoring, dan EDA; menyebarkan kuesioner.
+     - Andreas: menganalisis metode scoring berdasarkan teori asli dan kesesuaiannya dengan UAS; mencari referensi jurnal; menyebarkan kuesioner.
+     - Viriya: menyusun laporan; mengumpulkan referensi; menyebarkan kuesioner.
+
+     Repository: https://github.com/edwardchristi4n/machine_learning_exam

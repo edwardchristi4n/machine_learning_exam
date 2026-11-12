@@ -9,7 +9,7 @@ Dokumen ini memetakan setiap poin Spesifikasi Proyek UTS Bagian **7.2 (Data Clea
 | Data awal | 194 baris × 116 kolom (`dataset/raw/Survei_Gaya_Belajar_IPS_IPK_NO_PII.xlsx`, MD5 `390ab027d2a950f63a72684d795caa72`) |
 | Data hasil | 192 baris × 228 kolom (`dataset/KelpAdam_survey_prepared.csv`) |
 | Cleaning log | `dictionary/KelpAdam_cleaning_log.csv` (10 entri: C1–C9; C5 punya 2 entri) |
-| Data dictionary | `dictionary/KelpAdam_data_dictionary.xlsx` (228 kolom terdokumentasi) |
+| Data dictionary | `dictionary/KelpAdam_data_dictionary.xlsx` (228 kolom terdokumentasi, 5 lembar, bisa ditelusuri sampai kolom Excel asli) |
 
 **Kode bagian di notebook:** 1.x = data understanding, C1–C10 = cleaning, S1–S4 = scoring teori, S5 = fitur & label versi panduan UAS, P1–P3 = preparation.
 
@@ -91,7 +91,7 @@ Dokumen ini memetakan setiap poin Spesifikasi Proyek UTS Bagian **7.2 (Data Clea
 
 | Bagian | Hasil | Status |
 |---|---|---|
-| P3 | 228 kolom terdokumentasi dengan: `nama_kolom`, `jenis`, `tipe_data`, `arti`, `nilai_valid`, `nilai_teramati`, `terisi`, `raw_atau_derived`, `sumber_aturan` | ✅ |
+| P3 | 228 kolom terdokumentasi dengan: `nama_kolom`, `jenis`, `arti`, `tipe_data`, `nilai_valid`, `nilai_teramati`, `terisi`, `kosong`, `raw_atau_derived`, `sumber_aturan`. Untuk keterlacakan ditambah `kolom_excel_asli` (huruf kolom di file dosen), `dibentuk_dari` (kolom bahan hitungan), dan `langkah_notebook` (C1–P1). File Excel berisi 5 lembar: `cara_baca`, `data_dictionary`, `ringkasan_jenis`, `langkah_notebook`, `cleaning_log` | ✅ |
 
 ### Tabel 5 jenis kolom
 

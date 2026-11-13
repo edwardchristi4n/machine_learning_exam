@@ -7,11 +7,11 @@ Dokumen ini memetakan setiap poin Spesifikasi Proyek UTS Bagian **7.2 (Data Clea
 | | |
 |---|---|
 | Data awal | 194 baris × 116 kolom (`dataset/raw/Survei_Gaya_Belajar_IPS_IPK_NO_PII.xlsx`, MD5 `390ab027d2a950f63a72684d795caa72`) |
-| Data hasil | 192 baris × 228 kolom (`dataset/KelpAdam_survey_prepared.csv`) |
+| Data hasil | 192 baris × 216 kolom (`dataset/KelpAdam_survey_prepared.csv`) |
 | Cleaning log | `dictionary/KelpAdam_cleaning_log.csv` (10 entri: C1–C9; C5 punya 2 entri) |
-| Data dictionary | `dictionary/KelpAdam_data_dictionary.xlsx` (228 kolom terdokumentasi, 5 lembar, bisa ditelusuri sampai kolom Excel asli) |
+| Data dictionary | `dictionary/KelpAdam_data_dictionary.xlsx` (216 kolom terdokumentasi, 6 lembar termasuk `aturan_scoring`, bisa ditelusuri sampai kolom Excel asli) |
 
-**Kode bagian di notebook:** 1.x = data understanding, C1–C10 = cleaning, S1–S4 = scoring teori, S5 = fitur & label versi panduan UAS, P1–P3 = preparation.
+**Kode bagian di notebook:** 1.x = data understanding, C1–C10 = cleaning, S1–S5 = scoring sesuai panduan dosen (S5 = verifikasi manual), P1–P3 = preparation.
 
 ---
 
@@ -79,19 +79,19 @@ Dokumen ini memetakan setiap poin Spesifikasi Proyek UTS Bagian **7.2 (Data Clea
 
 | Bagian | Hasil | Status |
 |---|---|---|
-| Bagian 3–4 | Tidak ada scaling, imputasi, atau transformasi yang belajar dari data. Yang dibuat hanya scoring (diarahkan dosen), perkiraan angkatan (konteks EDA), dan 64 indikator VARK 0/1 (S5). Indikator ini pengodean pasti dari instrumen yang diminta Panduan UAS, bukan preprocessing ML, sehingga tidak menimbulkan leakage | ✅ |
+| Bagian 3–4 | Tidak ada scaling, imputasi, atau transformasi yang belajar dari data. Yang dibuat hanya scoring (aturan panduan dosen), perkiraan angkatan (konteks EDA), dan 64 indikator VARK 0/1 (S1). Indikator ini pengodean pasti dari instrumen yang diminta panduan, bukan preprocessing ML, sehingga tidak menimbulkan leakage | ✅ |
 
 ### Poin 4 – Derived variables/scoring eksplisit & sumber aturan didokumentasikan
 
 | Bagian | Hasil | Status |
 |---|---|---|
-| S1–S5, sel "Referensi aturan scoring", P1, P3 | Setiap scoring punya markdown yang menjelaskan aturannya dan kode yang eksplisit. Sumber teori dicantumkan di sel referensi (Fleming; Felder & Soloman; Kolb & Kolb 2005; Honey & Mumford) dan di kolom `sumber_aturan` data dictionary. Label versi UAS (S5) bersumber dari Panduan UAS Klasifikasi Bagian 3–6 | ✅ |
+| S1–S5, sel "Referensi aturan scoring", P3 | Setiap scoring punya markdown aturan dan kode eksplisit. Aturan dari Panduan UAS Klasifikasi Bagian 3–6 (arahan dosen & asdos, 13 Nov 2026); cut-off resmi tidak dipakai sesuai catatan instrumen. Dasar teori & referensi ada di sel referensi, kolom `dasar_teori`/`sumber_aturan`, dan lembar `aturan_scoring` data dictionary | ✅ |
 
 ### Poin 5 – Data dictionary: nama kolom, tipe data, arti, range/kategori valid, raw/derived
 
 | Bagian | Hasil | Status |
 |---|---|---|
-| P3 | 228 kolom terdokumentasi dengan: `nama_kolom`, `jenis`, `arti`, `tipe_data`, `nilai_valid`, `nilai_teramati`, `terisi`, `kosong`, `raw_atau_derived`, `sumber_aturan`. Untuk keterlacakan ditambah `kolom_excel_asli` (huruf kolom di file dosen), `dibentuk_dari` (kolom bahan hitungan), dan `langkah_notebook` (C1–P1). File Excel berisi 5 lembar: `cara_baca`, `data_dictionary`, `ringkasan_jenis`, `langkah_notebook`, `cleaning_log` | ✅ |
+| P3 | 216 kolom terdokumentasi dengan: `nama_kolom`, `jenis`, `arti`, `tipe_data`, `nilai_valid`, `nilai_teramati`, `terisi`, `kosong`, `raw_atau_derived`, `kolom_excel_asli`, `dibentuk_dari`, `langkah_notebook`, `dasar_teori`, `sumber_aturan`. File Excel berisi 6 lembar: `cara_baca`, `data_dictionary`, `aturan_scoring`, `ringkasan_jenis`, `langkah_notebook`, `cleaning_log` | ✅ |
 
 ### Tabel 5 jenis kolom
 
@@ -99,19 +99,19 @@ Dokumen ini memetakan setiap poin Spesifikasi Proyek UTS Bagian **7.2 (Data Clea
 |---|---|---|---|
 | 1 Metadata non-identifying | Aman dianalisis | IPS per semester + IPK (10 kolom). Angkatan 2022 (1 orang) digabung ke "<=2023" agar tidak bisa dikenali | ✅ |
 | 2 Raw/coded survey items | Dipertahankan untuk audit; makna jawaban asli tidak diubah | 16 VARK + 88 Likert (104 kolom); hanya format/tipe yang dirapikan (C3, C4) | ✅ |
-| 3 Scores/dimensions | Dihitung dengan aturan yang disetujui dosen | 23 kolom skor. Arahan dosen (6 Nov 2026): scoring harus sesuai teori keempat model | ✅ |
-| 4 Labels/profiles | Dapat ditelusuri ke aturan scoring; tidak dengan cut-off arbitrer | 20 kolom label: 16 label teori + 4 label versi panduan UAS (`*_label_uas`, S5). Batas label teori: VARK = stepping distance Fleming; Felder = ambang ILS 1–3/5–7/9–11 diskalakan proporsional; Kolb = median sampel (cara LSI 3.1); Honey-Mumford = pita persentil 10/20/40/20/10% (cara LSQ) | ✅ |
-| 5 Prepared variables | Transformasi dijelaskan di notebook & dictionary | 70 kolom: `angkatan_inferred`, `n_semester_ips`, `row_sd`, `longstring_max`, `flag_straightline`, `flag_near_straight`, dan 64 indikator VARK 0/1 (`VARK_Q01_V` … `VARK_Q16_K`, S5) | ✅ |
+| 3 Scores/dimensions | Dihitung dengan aturan yang disetujui dosen | 27 kolom skor (jumlah per dimensi + selisih), sesuai Panduan UAS; arahan dosen & asdos 13 Nov 2026 | ✅ |
+| 4 Labels/profiles | Dapat ditelusuri ke aturan scoring; tidak dengan cut-off arbitrer | 4 label (satu y per framework): `VARK_label`, `FS_ACT_REF_label`, `HM_label`, `KOLB_label`, aturan dari panduan dosen; tanpa cut-off/norma resmi (catatan instrumen) | ✅ |
+| 5 Prepared variables | Transformasi dijelaskan di notebook & dictionary | 70 kolom: `angkatan_inferred`, `n_semester_ips`, `row_sd`, `longstring_max`, `flag_straightline`, `flag_near_straight`, dan 64 indikator VARK 0/1 (`VARK_Q01_V` … `VARK_Q16_K`, S1) | ✅ |
 
-### Mengapa dataset prepared berisi 228 kolom
+### Mengapa dataset prepared berisi 216 kolom
 
 | Jenis | Kolom | Alasan |
 |---|---|---|
 | Identifier | 1 | Kunci baris |
 | Metadata | 10 | Konteks akademik (IPS_2026_S1 dibuang karena kosong seluruhnya) |
 | Raw survey item | 104 | **Wajib** dipertahankan untuk audit (tabel 7.3 no. 2) |
-| Score | 23 | Bahan EDA dan modelling |
-| Label/profile | 20 | Calon target modelling: 16 label teori + 4 label versi UAS |
+| Score | 27 | Profil per dimensi (bahan EDA, audit label) |
+| Label/profile | 4 | Target klasifikasi UAS (satu per framework) |
 | Prepared variable | 70 | Konteks, bukti kualitas data, dan 64 indikator VARK (fitur X VARK untuk UAS) |
 
 Pemilihan fitur untuk melatih model dilakukan di tahap modelling, bukan di UTS (Spesifikasi 7.3 poin 3).
